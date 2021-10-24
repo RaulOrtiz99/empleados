@@ -1,4 +1,6 @@
-# Empleados
+# Empleados 
+
+#este proyecto es una practica de un tipico CRUD hecho con angular y firebase, pd: ta bonito angular :)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
