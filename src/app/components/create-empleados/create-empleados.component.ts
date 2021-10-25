@@ -11,8 +11,9 @@ export class CreateEmpleadosComponent implements OnInit {
   createEmpleado: FormGroup;
   submitted=false;
 
-  constructor(private fb:FormBuilder,
-              private _empleadoService:EmpleadoService
+  constructor(
+    private fb:FormBuilder,
+    private _empleadoService:EmpleadoService
   ) {
 
     this.createEmpleado=this.fb.group({
