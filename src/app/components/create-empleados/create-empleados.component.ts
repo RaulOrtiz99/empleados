@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {EmpleadoService} from "../../services/empleado.service";
+import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-create-empleados',
@@ -10,12 +12,15 @@ import {EmpleadoService} from "../../services/empleado.service";
 export class CreateEmpleadosComponent implements OnInit {
   createEmpleado: FormGroup;
   submitted=false;
+  loading=false;
 
   constructor(
-    private fb:FormBuilder,
-    private _empleadoService:EmpleadoService
-  ) {
 
+    private fb:FormBuilder,
+    private _empleadoService:EmpleadoService,
+    private router:Router,
+    private toastr: ToastrService
+  ) {
     this.createEmpleado=this.fb.group({
       nombre:['',Validators.required],
       apellido:['',Validators.required],
@@ -26,6 +31,7 @@ export class CreateEmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   //Este medoto agrega empleados o mas bien los crea en firebase
   agregarEmpleado():void{
     this.submitted=true;
@@ -36,15 +42,26 @@ export class CreateEmpleadosComponent implements OnInit {
     const empleado:any={
       nombre: this.createEmpleado.value.nombre,
       apellido: this.createEmpleado.value.apellido,
+      documento:this.createEmpleado.value.documento,
       salario: this.createEmpleado.value.salario,
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
+    this.loading=true;
     this._empleadoService.agregarEmpleado(empleado).then(()=>{
-      console.log("Empleado registrado con exito");
+     // console.log("Empleado registrado con exito");
+      this.toastr.success('El empleado fue registrado con exito','Empleado registrado',{
+        positionClass:'toast-bottom-right',
+      });
+      //redireccionar con router
+      this.loading=false;
+      this.router.navigate(['/list-empleados']);
     }).catch(error=>{
       console.log(error);
     })
   }
+
+
+
 
 }
