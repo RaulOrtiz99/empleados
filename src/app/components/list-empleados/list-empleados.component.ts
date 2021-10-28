@@ -36,5 +36,14 @@ items: Observable<any[]>
       console.log(this.empleados);
     })
   }
+  eliminarEmpleado(id:string){
+    this._empleadoService.eliminarEmpleado(id).then(()=>{
+      console.log('empleado eliminado');
+    }).catch(error=>{
+      console.log(error);
+    })
+  }
+
+
 
 }

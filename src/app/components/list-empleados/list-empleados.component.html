@@ -23,8 +23,8 @@
             <td>{{empleado.documento}}</td>
             <td>{{empleado.salario}}</td>
             <td>
-              <i class="fas fa-edit fa-lg text-info mr-3"></i>
-              <i class="fas fa-trash-alt fa-lg text-danger"></i>
+              <i class="fas fa-edit fa-lg text-info mr-3" [routerLink]="['/editEmpleado/',empleado.id]" ></i>
+              <i (click)="eliminarEmpleado(empleado.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
             </td>
           </tr>
 
